@@ -86,3 +86,12 @@ void MyShader::delProgram() {
 void MyShader::setBool(const std::string& name, bool value) const {
 	glUniform1i(glGetUniformLocation(programId, name.c_str()), (int)value);
 }
+
+void MyShader::setInt(const std::string& name, int value) const
+{
+	glUniform1i(glGetUniformLocation(programId, name.c_str()),value);
+}
+
+void MyShader::setMatrix4fv(const std::string& name, float* value) const {
+	glUniformMatrix4fv(glGetUniformLocation(programId, name.c_str()), 1, GL_FALSE, value);
+}
