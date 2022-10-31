@@ -32,5 +32,7 @@ public:
 
 	void setMatrix4fv(const std::string& name, float* value) const;
 
+	void setVec3(const std::string& name, float* value) const;
+
 	void delProgram();
 };

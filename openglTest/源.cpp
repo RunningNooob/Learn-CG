@@ -25,6 +25,7 @@ float lastFrame = 0.0f;
 float cursorLastX = SCR_WIDTH / 2;
 float cursorLastY = SCR_HEIGHT / 2;
 
+glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
@@ -152,7 +153,16 @@ int main() {
 	glBindVertexArray(0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+	unsigned int lightVAO;
+	glGenVertexArrays(1, &lightVAO);
+	glBindVertexArray(lightVAO);
+	glBindBuffer(GL_ARRAY_BUFFER,VBO);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+
 	MyShader shader("res/shaders/vertexShader.vert", "res/shaders/fragmentShader.frag");
+	MyShader lampShader("res/shaders/lightVertexShader.vert","res/shaders/lightFragmentShader.frag");
 
 	unsigned int texture1 = createTexture("res/texture/container.jpg", GL_RGB);
 	unsigned int texture2 = createTexture("res/texture/awesomeface.png", GL_RGBA);
@@ -177,31 +187,32 @@ int main() {
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
 
-		shader.use();
-
 		glm::mat4 projection(1.0f);
 		projection = glm::perspective(glm::radians(camera.getFOV()), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
-
 		glm::mat4 view = camera.getViewMatrix();
+		
+		
+		shader.use();
 		shader.setMatrix4fv("view", glm::value_ptr(view));
 		shader.setMatrix4fv("projection", glm::value_ptr(projection));
-
-
 		glBindVertexArray(VAO);
 		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+		glm::mat4 model(1.0f);
+		shader.setMatrix4fv("model", glm::value_ptr(model));
+		shader.setVec3("lightColor", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
+		shader.setVec3("objectColor", &glm::vec3(1.0f, 0.5f, 0.31f)[0]);
 
-
-		for (int i = 0; i < 10; ++i) {
-			glm::mat4 model(1.0f);
-			model = glm::translate(model, cubePositions[i]);
-			model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f) * (i), glm::vec3(0.5f, 1.0f, 0.0f));
-
-			shader.setMatrix4fv("model", glm::value_ptr(model));
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-		}
-
-		glBindVertexArray(0);
-
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		
+		lampShader.use();
+		glBindVertexArray(lightVAO);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, lightPos);
+		model = glm::scale(model, glm::vec3(0.2f));
+		lampShader.setMatrix4fv("model", glm::value_ptr(model));
+		lampShader.setMatrix4fv("view", glm::value_ptr(view));
+		lampShader.setMatrix4fv("projection",glm::value_ptr(projection));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwPollEvents();
 		glfwSwapBuffers(window);

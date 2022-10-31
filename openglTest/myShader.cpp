@@ -95,3 +95,8 @@ void MyShader::setInt(const std::string& name, int value) const
 void MyShader::setMatrix4fv(const std::string& name, float* value) const {
 	glUniformMatrix4fv(glGetUniformLocation(programId, name.c_str()), 1, GL_FALSE, value);
 }
+
+void MyShader::setVec3(const std::string& name, float* value) const
+{
+	glUniform3fv(glGetUniformLocation(programId, name.c_str()), 1, value);
+}
