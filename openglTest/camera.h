@@ -10,6 +10,7 @@
 glm::vec3 const POS = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 const FRONT = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 const UP = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::vec3 const WORLD_UP = glm::vec3(0.0f, 1.0f, 0.0f);
 float const YAW = -90.0f;
 float const PITCH = 0.0f;
 float const FOV = 45.0f;
@@ -20,7 +21,9 @@ enum Camera_Movement {
 	FORWARD,
 	BACKWARD,
 	LEFT,
-	RIGHT
+	RIGHT,
+	RISE,
+	DOWN
 };
 
 class Camera {

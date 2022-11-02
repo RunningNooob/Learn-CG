@@ -2,7 +2,7 @@
 
 
 
-Camera::Camera(glm::vec3 pos, glm::vec3 front, glm::vec3 up, float yaw , float pitch) {
+Camera::Camera(glm::vec3 pos, glm::vec3 front, glm::vec3 up, float yaw, float pitch) {
 
 	this->pos = pos;
 	this->front = front;
@@ -26,24 +26,28 @@ glm::mat4 Camera::getViewMatrix() {
 void Camera::processKeyBoard(Camera_Movement type, float deltaTime)
 {
 	float velocity = speed * deltaTime;
-	
 	switch (type) {
-		case FORWARD:
-			pos += velocity * front;
-			break;
+	case FORWARD:
+		pos += velocity * front;
+		break;
 
-		case BACKWARD:
-			pos -= velocity * front;
-			break;
+	case BACKWARD:
+		pos -= velocity * front;
+		break;
 
-		case LEFT:
-			pos -= velocity * glm::normalize(glm::cross(front, up));
-			break;
+	case LEFT:
+		pos -= velocity * glm::normalize(glm::cross(front, up));
+		break;
 
-		case RIGHT:
-			pos += velocity * glm::normalize(glm::cross(front, up));
-			break;
-
+	case RIGHT:
+		pos += velocity * glm::normalize(glm::cross(front, up));
+		break;
+	case RISE:
+		pos += velocity * WORLD_UP;
+		break;
+	case DOWN:
+		pos -= velocity * WORLD_UP;
+		break;
 	}
 }
 
@@ -59,7 +63,7 @@ void Camera::processMouseMovement(float xOffset, float yOffset)
 		pitch = 89.0f;
 	}
 	else if (pitch < -89.0f) {
-		pitch = 89.0f;
+		pitch = -89.0f;
 	}
 
 	front.x = glm::cos(glm::radians(pitch)) * glm::cos(glm::radians(yaw));
@@ -71,7 +75,7 @@ void Camera::processMouseMovement(float xOffset, float yOffset)
 	up.y = glm::cos(glm::radians(pitch));
 	up.z = glm::sin(glm::radians(pitch)) * (-1.0) * glm::sin(glm::radians(yaw));
 	up = glm::normalize(up);
-	
+
 }
 
 void Camera::processMouseScroll(float yOffset)
