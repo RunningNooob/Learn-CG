@@ -34,7 +34,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 int main() {
-	
+
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -66,48 +66,48 @@ int main() {
 
 	float vertices[] = {
 
-	//顶点坐标				法线			
-	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		//顶点坐标				法线				纹理
+		 -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
 
-	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-	 0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-	-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   1.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,   0.0f, 0.0f,
 
-	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-	-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-	-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
 
-	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-	 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-	 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
 
-	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-	 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-	-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
 
-	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-	 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-	-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 	};
 
 	unsigned int indices[]{
@@ -128,7 +128,7 @@ int main() {
 		  glm::vec3(-1.3f,  1.0f, -1.5f)
 	};
 
-	
+
 	unsigned int VAO = 0;
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -137,11 +137,12 @@ int main() {
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 
 	/*unsigned int EBO = 0;
 	glGenBuffers(1, &EBO);
@@ -156,19 +157,19 @@ int main() {
 	unsigned int lightVAO;
 	glGenVertexArrays(1, &lightVAO);
 	glBindVertexArray(lightVAO);
-	glBindBuffer(GL_ARRAY_BUFFER,VBO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
 
 	MyShader shader("res/shaders/vertexShader.vert", "res/shaders/fragmentShader.frag");
-	MyShader lampShader("res/shaders/lightVertexShader.vert","res/shaders/lightFragmentShader.frag");
+	MyShader lampShader("res/shaders/lightVertexShader.vert", "res/shaders/lightFragmentShader.frag");
 
-	unsigned int texture1 = createTexture("res/texture/container.jpg", GL_RGB);
-	unsigned int texture2 = createTexture("res/texture/awesomeface.png", GL_RGBA);
+	unsigned int diffuseTexture = createTexture("res/texture/container2.png", GL_RGBA);
+	unsigned int specularTexture = createTexture("res/texture/container2_specular.png", GL_RGBA);
 	shader.use();
-	shader.setInt("texture1", 0);
-	shader.setInt("texture2", 1);
+	shader.setInt("material.diffuse", GL_TEXTURE0 - GL_TEXTURE0);
+	shader.setInt("material.specular", GL_TEXTURE1 - GL_TEXTURE0);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -181,32 +182,59 @@ int main() {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		/*glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture1);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, texture2);*/
-
 		glm::mat4 projection(1.0f);
 		projection = glm::perspective(glm::radians(camera.getFOV()), (float)(SCR_WIDTH / SCR_HEIGHT), 0.1f, 100.0f);
 		glm::mat4 view = camera.getViewMatrix();
-		
-		
+
+
 		shader.use();
 		shader.setMatrix4fv("view", glm::value_ptr(view));
 		shader.setMatrix4fv("projection", glm::value_ptr(projection));
 		glBindVertexArray(VAO);
+
 		//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+
 		glm::mat4 model(1.0f);
-		glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(view * model)));
 
-		shader.setMatrix4fv("model", glm::value_ptr(model));
-		shader.setVec3("lightColor", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
-		shader.setVec3("objectColor", &glm::vec3(1.0f, 0.5f, 0.31f)[0]);
-		shader.setVec3("lightPos", glm::value_ptr(glm::vec3(view * glm::vec4(lightPos,1.0f))));
-		shader.setMatrix3fv("normalMatrix", glm::value_ptr(normalMatrix));
+		//设置DirLight结构体uniform
+		shader.setVec3("dirLight.direction", glm::value_ptr(glm::vec3(-0.2f, -1.0f, -0.3f)));
+		shader.setVec3("dirLight.ambient", &glm::vec3(0.2f, 0.2f, 0.2f)[0]);
+		shader.setVec3("dirLight.diffuse", &glm::vec3(0.5f, 0.5f, 0.5f)[0]);
+		shader.setVec3("dirLight.specular", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
 
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		
+		//设置PointLight结构体uniform数组
+		shader.setVec3("light.position", glm::value_ptr(glm::vec3(view * glm::vec4(lightPos, 1.0f))));
+		shader.setVec3("light.ambient", &glm::vec3(0.2f, 0.2f, 0.2f)[0]);
+		shader.setVec3("light.diffuse", &glm::vec3(0.5f, 0.5f, 0.5f)[0]);
+		shader.setVec3("light.specular", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
+		shader.setFloat("light.constant", 1.0f);
+		shader.setFloat("light.linear", 0.09f);
+		shader.setFloat("light.quadratic", 0.032f);
+
+
+		//设置material结构体uniform
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, diffuseTexture);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, specularTexture);
+		shader.setFloat("material.shininess", 32.0f);
+
+
+		for (unsigned int i = 0; i < 10; i++)
+		{
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, cubePositions[i]);
+			float angle = 20.0f * i;
+			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+			shader.setMatrix4fv("model", glm::value_ptr(model));
+
+			glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(view * model)));
+			shader.setMatrix3fv("normalMatrix", glm::value_ptr(normalMatrix));
+
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
+
+
 		lampShader.use();
 		glBindVertexArray(lightVAO);
 		model = glm::mat4(1.0f);
@@ -214,7 +242,7 @@ int main() {
 		model = glm::scale(model, glm::vec3(0.2f));
 		lampShader.setMatrix4fv("model", glm::value_ptr(model));
 		lampShader.setMatrix4fv("view", glm::value_ptr(view));
-		lampShader.setMatrix4fv("projection",glm::value_ptr(projection));
+		lampShader.setMatrix4fv("projection", glm::value_ptr(projection));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwPollEvents();
@@ -280,7 +308,7 @@ unsigned int createTexture(const char* path, unsigned int type) {
 	return texture;
 }
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos){
+void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
 
 	float offsetX = xpos - cursorLastX;
 	float offsetY = cursorLastY - ypos;
@@ -290,6 +318,6 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos){
 	camera.processMouseMovement(offsetX, offsetY);
 }
 
-void scroll_callback(GLFWwindow* window, double xOffset, double yOffset){
+void scroll_callback(GLFWwindow* window, double xOffset, double yOffset) {
 	camera.processMouseScroll(yOffset);
 }
