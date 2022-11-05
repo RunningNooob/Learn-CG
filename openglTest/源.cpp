@@ -128,6 +128,12 @@ int main() {
 		  glm::vec3(-1.3f,  1.0f, -1.5f)
 	};
 
+	glm::vec3 pointLightPositions[] = {
+	glm::vec3(0.7f,  0.2f,  2.0f),
+	glm::vec3(2.3f, -3.3f, -4.0f),
+	glm::vec3(-4.0f,  2.0f, -12.0f),
+	glm::vec3(0.0f,  0.0f, -3.0f)
+	};
 
 	unsigned int VAO = 0;
 	glGenVertexArrays(1, &VAO);
@@ -203,14 +209,19 @@ int main() {
 		shader.setVec3("dirLight.specular", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
 
 		//设置PointLight结构体uniform数组
-		shader.setVec3("light.position", glm::value_ptr(glm::vec3(view * glm::vec4(lightPos, 1.0f))));
-		shader.setVec3("light.ambient", &glm::vec3(0.2f, 0.2f, 0.2f)[0]);
-		shader.setVec3("light.diffuse", &glm::vec3(0.5f, 0.5f, 0.5f)[0]);
-		shader.setVec3("light.specular", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
-		shader.setFloat("light.constant", 1.0f);
-		shader.setFloat("light.linear", 0.09f);
-		shader.setFloat("light.quadratic", 0.032f);
-
+		std::string indexStr = "0123";
+		std::string index;
+		for (int i = 0; i < 4; ++i) {
+			index = indexStr[i];
+			shader.setVec3("pointLights[" + index + "].position", glm::value_ptr(glm::vec3(view * glm::vec4(pointLightPositions[i], 1.0f))));
+			shader.setVec3("pointLights[" + index + "].ambient", &glm::vec3(0.2f, 0.2f, 0.2f)[0]);
+			shader.setVec3("pointLights[" + index + "].diffuse", &glm::vec3(0.5f, 0.5f, 0.5f)[0]);
+			shader.setVec3("pointLights[" + index + "].specular", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
+			shader.setFloat("pointLights[" + index + "].constant", 1.0f);
+			shader.setFloat("pointLights[" + index + "].linear", 0.09f);
+			shader.setFloat("pointLights[" + index + "].quadratic", 0.032f);
+		}
+		
 
 		//设置material结构体uniform
 		glActiveTexture(GL_TEXTURE0);
@@ -237,13 +248,15 @@ int main() {
 
 		lampShader.use();
 		glBindVertexArray(lightVAO);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, lightPos);
-		model = glm::scale(model, glm::vec3(0.2f));
-		lampShader.setMatrix4fv("model", glm::value_ptr(model));
-		lampShader.setMatrix4fv("view", glm::value_ptr(view));
-		lampShader.setMatrix4fv("projection", glm::value_ptr(projection));
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		for (int i = 0; i < 4; ++i) {
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, pointLightPositions[i]);
+			model = glm::scale(model, glm::vec3(0.2f));
+			lampShader.setMatrix4fv("model", glm::value_ptr(model));
+			lampShader.setMatrix4fv("view", glm::value_ptr(view));
+			lampShader.setMatrix4fv("projection", glm::value_ptr(projection));
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
 
 		glfwPollEvents();
 		glfwSwapBuffers(window);
