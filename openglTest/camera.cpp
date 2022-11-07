@@ -19,6 +19,16 @@ float Camera::getFOV()
 	return this->fov;
 }
 
+glm::vec3 Camera::getFront()
+{
+	return front;
+}
+
+glm::vec3 Camera::getPosition()
+{
+	return pos;
+}
+
 glm::mat4 Camera::getViewMatrix() {
 	return glm::lookAt(pos, pos + front, up);
 }

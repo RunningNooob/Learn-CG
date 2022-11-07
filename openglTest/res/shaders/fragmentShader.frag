@@ -73,20 +73,54 @@ vec3 calcDirLight(DirLight dirLight, vec3 normalDir, vec3 viewDir){
 	return ambient + diffuse + specular; 
 }
 
+//聚光灯结构体和函数
+struct SpotLight{
+	vec3 position;
+	vec3 direction;
+	float cutOff;
+	float outerCutOff;
 
+	vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+uniform SpotLight spotLight;
+
+vec3 calSpotLight(SpotLight spotLight, vec3 normalDir, vec3 viewDir){
+	vec3 light2FragDir = normalize(fragPos - spotLight.position);
+	float fragCutOff = dot(light2FragDir,normalize(spotLight.direction));
+
+	vec3 ambient = spotLight.ambient * vec3(texture(material.diffuse,texCoord));
+
+	vec3 lightDir = -light2FragDir;
+	vec3 diffuse = max(dot(lightDir,normalDir),0) * vec3(texture(material.diffuse,texCoord)) * spotLight.diffuse;
+
+	vec3 halfDir = normalize(lightDir + viewDir);
+	float cosHN = max(dot(halfDir,normalDir),0);
+	vec3 specular = pow(cosHN, material.shininess) * spotLight.specular * vec3(texture(material.specular,texCoord));
+
+	float intensity = clamp((fragCutOff - spotLight.outerCutOff)/(spotLight.cutOff- spotLight.outerCutOff),0.0 ,1.0);
+
+	diffuse *= intensity;
+	specular *= intensity;
+
+	return ambient + diffuse + specular;
+	
+}
 
 void main()
 {
 	vec3 result;
-
 	vec3 normalDir = normalize(normal);
 	vec3 viewDir = -normalize(fragPos);
 
 	result += calcDirLight(dirLight,normalDir,viewDir);
+
 	for(int i=0; i < NR_POINT_LIGHTS ; ++i){
 		result += calPointLight(pointLights[i],normalDir, viewDir);
 	}
 	
+	result += calSpotLight(spotLight,normalDir,viewDir);
 
 	FragColor = vec4(result, 1.0);
 };

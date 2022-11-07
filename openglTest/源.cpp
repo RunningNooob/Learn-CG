@@ -204,7 +204,7 @@ int main() {
 
 		//设置DirLight结构体uniform
 		shader.setVec3("dirLight.direction", glm::value_ptr(glm::vec3(-0.2f, -1.0f, -0.3f)));
-		shader.setVec3("dirLight.ambient", &glm::vec3(0.2f, 0.2f, 0.2f)[0]);
+		shader.setVec3("dirLight.ambient", &glm::vec3(0.05f, 0.05f, 0.05f)[0]);
 		shader.setVec3("dirLight.diffuse", &glm::vec3(0.5f, 0.5f, 0.5f)[0]);
 		shader.setVec3("dirLight.specular", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
 
@@ -214,14 +214,23 @@ int main() {
 		for (int i = 0; i < 4; ++i) {
 			index = indexStr[i];
 			shader.setVec3("pointLights[" + index + "].position", glm::value_ptr(glm::vec3(view * glm::vec4(pointLightPositions[i], 1.0f))));
-			shader.setVec3("pointLights[" + index + "].ambient", &glm::vec3(0.2f, 0.2f, 0.2f)[0]);
-			shader.setVec3("pointLights[" + index + "].diffuse", &glm::vec3(0.5f, 0.5f, 0.5f)[0]);
+			shader.setVec3("pointLights[" + index + "].ambient", &glm::vec3(0.05f, 0.05f, 0.05f)[0]);
+			shader.setVec3("pointLights[" + index + "].diffuse", &glm::vec3(0.5f, 1.0f, 0.5f)[0]);
 			shader.setVec3("pointLights[" + index + "].specular", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
 			shader.setFloat("pointLights[" + index + "].constant", 1.0f);
 			shader.setFloat("pointLights[" + index + "].linear", 0.09f);
 			shader.setFloat("pointLights[" + index + "].quadratic", 0.032f);
 		}
 		
+		//设置SpotLight结构体uniform
+		shader.setVec3("spotLight.position", glm::value_ptr(glm::vec3(view * glm::vec4(camera.getPosition(),1.0f))));
+		shader.setVec3("spotLight.direction", glm::value_ptr(glm::vec3(view* glm::vec4(camera.getFront(), 0.0f))));
+		shader.setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
+		shader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(17.5f)));
+		shader.setVec3("spotLight.ambient", &glm::vec3(0.05f, 0.05f, 0.05f)[0]);
+		shader.setVec3("spotLight.diffuse", &glm::vec3(0.5f, 0.5f, 0.5f)[0]);
+		shader.setVec3("spotLight.specular", &glm::vec3(1.0f, 1.0f, 1.0f)[0]);
+
 
 		//设置material结构体uniform
 		glActiveTexture(GL_TEXTURE0);

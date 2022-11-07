@@ -45,6 +45,10 @@ public:
 
 	float getFOV();
 
+	glm::vec3 getFront();
+
+	glm::vec3 getPosition();
+
 	glm::mat4 getViewMatrix();
 
 	void processKeyBoard(Camera_Movement type, float deltaTime);
